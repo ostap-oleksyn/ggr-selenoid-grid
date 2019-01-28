@@ -42,9 +42,9 @@ Metadata:
           
     ParameterLabels:
       VpcId:
-        default: 'Which Vpc to use'
+        default: 'Which Vpc to use (Required)'
       AvailabilityZone:
-        default: 'Which Availability Zone to use'
+        default: 'Which Availability Zone to use (Required)'
       KeyName:
         default: 'Key pair name (Optional)'
       LaunchGgr:
@@ -87,12 +87,16 @@ Metadata:
 Parameters:
   VpcId:
     Type: AWS::EC2::VPC::Id
+    AllowedPattern: '.+'
+    ConstraintDescription: Vpc Id parameter can't be empty
   KeyName:
     Type: String
     Default: ''
     Description: Key Pair name fo ssh acces to instances
   AvailabilityZone:
     Type: AWS::EC2::AvailabilityZone::Name
+    AllowedPattern: '.+'
+    ConstraintDescription: Availability Zone parameter can't be empty
   LaunchGgr:
     Type: String
     Default: 'Yes'
@@ -139,8 +143,8 @@ Parameters:
     Description: Enter desired instances count
   Browsers:
     Type: String
-    Default: 'chrome'
-    Description: Browser names and versions in cm format(e.g. chrome:69;firefox:60) - https://aerokube.com/cm/latest/#_downloading_only_some_browser_versions
+    Default: 'chrome;firefox'
+    Description: Browser names and versions in cm format(e.g. chrome:69;firefox:60;opera) - https://aerokube.com/cm/latest/#_downloading_only_some_browser_versions
   BrowsersLimit:
     Type: Number
     Default: 1
